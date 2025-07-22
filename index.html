@@ -1,9 +1,132 @@
 <html>
-	<head>
-		<title>Sunday Software</title>
-	</head>
-	<body>
-		<h1>Hello world!</h1>
-		<p>Some content should go here...</p>
-	</body>
+
+<head>
+	<link rel="stylesheet" href="assets/styles.css">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		const sections = [{
+				name: 'title',
+				start: 0,
+				end: 0.5,
+				activation: (scrollProgress) => {
+					document.documentElement.style.setProperty('--element-opacity', `${1 - (scrollProgress)*5}`);
+					document.documentElement.style.setProperty('--scroll-offset-x',
+						`-${30+(scrollProgress*window.innerWidth)}px`);
+					document.documentElement.style.setProperty('--scroll-offset-x2',
+						`${30+(scrollProgress*window.innerWidth)}px`);
+				}
+			},
+			{
+				name: "content1",
+				start: 0.05,
+				end: 0.3,
+				activation: (scrollProgress) => {
+					let opacity = 1 - Math.pow(scrollProgress - 0.5, 2) * 4
+					document.documentElement.style.setProperty('--content1-opacity', `${opacity}`);
+					document.documentElement.style.setProperty('--content1-transform',
+						`translateY(${(1 - scrollProgress) * 100}px)`);
+				}
+			},
+			{
+				name: "contact",
+				start: 0.3,
+				end: 1,
+				activation: (scrollProgress) => {
+					// let opacity = 1 - Math.pow(scrollProgress - 0.8, 2) * 5
+					document.documentElement.style.setProperty('--contactus-opacity', `${scrollProgress}`);
+					document.documentElement.style.setProperty('--contactus-transform',
+						`translateY(${((1 - scrollProgress) * 100)-350}px)`);
+				}
+			}
+		];
+
+		window.addEventListener('scroll', () => {
+			// Calculate progress based on scroll position
+			const scrollTop = window.scrollY || window.pageYOffset; // How far user scrolled from top
+			const scrollableHeight =  document.documentElement.scrollHeight - window.innerHeight; // Total scrollable distance
+			handleScroll(scrollTop / scrollableHeight, sections);
+		});
+
+		function handleScroll(scrollProgress, sections) {
+			sections.forEach(section => {
+				const internalScrollProgress = (scrollProgress - section.start) / (section.end - section.start);
+				section.activation(Math.min(1, Math.max(0, internalScrollProgress)));
+			});
+		}
+	</script>
+	<title>Sunday Software</title>
+</head>
+
+<body>
+	<!-- Spacer for scrollable content -->
+	<div class="h-[2000px]"></div>
+
+	<div class="fixed top-0 left-0 w-full h-full">
+		<div class="flex w-3/4 mx-auto">
+			<!-- Title  -->
+			<div class="w-full">
+				<div class="w-50 p-4 flex flex-col items-center justify-center">
+					<h1 id="title1"
+						class="transform translate-x-4 text-7xl font-bold text-gray-200  w-1/2 text-center mx-auto mb-2">
+						Sunday
+					</h1>
+					<h1 id="title2"
+						class="transform -translate-x-4 text-7xl font-bold text-gray-500  w-1/2 text-center mx-auto">
+						Software
+					</h1>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Content1 -->
+		<div id="content1" class="w-full">
+			<p class="text-5xl text-gray-200 text-center">
+				Our Products
+			</p>
+			<br /><br /><br />
+			<div class="h-[100px]">
+				<a target="_blank" href="https://distort.sh"><img src="assets/distortion.png" alt="Distortion"
+						class="mx-auto"></a>
+			</div>
+			<div class="h-[100px]">
+				<a target="_blank" href="https://hypesight.app">
+					<div class="font-anton text-center text-gray-200 text-5xl mx-auto">
+						<div class="inline-flex mr-2">HYPES<svg xmlns="http://www.w3.org/2000/svg" height="32px"
+								width="32px" version="1.1" id="_x32_" viewBox="0 0 512 512" class="">
+								<g>
+									<path fill="white"
+										d="M512,282.163c-0.881-1.49-21.826-38.71-63.998-76.621c-21.106-18.932-47.584-38.03-79.667-52.494   c-32.041-14.455-69.743-24.183-112.337-24.162c-42.595-0.014-80.296,9.707-112.341,24.162   c-48.12,21.722-83.626,53.753-107.33,80.244C12.627,259.846,0.644,281.037,0,282.163l29.331,16.484l13.676,7.749l0.024-0.042   l0.007-0.014c0.895-1.629,20.324-34.688,56.487-66.326c18.068-15.848,40.244-31.331,66.274-42.786   c26.061-11.456,55.91-18.96,90.199-18.974c35.104,0.014,65.561,7.881,92.056,19.798c39.685,17.848,70.324,45.171,90.808,68.131   c10.245,11.462,17.938,21.785,22.98,29.1c2.525,3.657,4.385,6.566,5.574,8.49c0.594,0.966,1.02,1.679,1.286,2.119l0.252,0.448   l0.042,0.063l9.707-5.518l-9.734,5.469L512,282.163z">
+									</path>
+									<path fill="white"
+										d="M255.999,210.339c-47.71,0-86.388,38.674-86.388,86.391c0,47.71,38.678,86.384,86.388,86.384   c47.71,0,86.388-38.674,86.388-86.384C342.386,249.014,303.708,210.339,255.999,210.339z">
+									</path>
+								</g>
+							</svg>GHT</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<!-- Contact -->
+		<div id="contact" class="w-full">
+			<p class="text-5xl text-gray-200 text-center">
+				Contact Us
+			</p>
+			<br /><br /><br />
+			<div class="h-[100px]">
+				<p class="text-center mx-auto text-gray-200">📧 daniel @ sunday • software</p>
+				<!-- <p class="text-center mx-auto text-gray-200">📧 danbot.</p> -->
+			</div>
+		</div>
+
+	</div>
+
+	<footer class="fixed bottom-0 left-0 w-full text-gray-200 p-4 text-center">
+		<p>
+			© 2025 Sunday Software
+		</p>
+	</footer>
+</body>
+
 </html>

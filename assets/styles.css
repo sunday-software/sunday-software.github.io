@@ -1,0 +1,64 @@
+html {
+    background-color: #1a1a1a;
+}
+
+/* On-load animation */
+:root {
+    /* Title animations */
+    --scroll-offset-x: -30px;
+    --scroll-offset-x2: 30px;
+    --element-opacity: 1;
+
+    /* Content animations */
+    --content1-opacity: 0;
+    --content1-transform: translateY(0);
+
+    --contactus-opacity: 0;
+    --contactus-transform: translateY(-200px);
+}
+
+#title1 {
+  opacity: 0;
+  animation: fadeInTop 500ms ease-out forwards;
+}
+
+@keyframes fadeInTop {
+  to {
+    opacity: var(--element-opacity);
+    transform: translateX(var(--scroll-offset-x));
+  }
+}
+
+#title2 {
+  opacity: 0;
+  animation: fadeInBottom 500ms ease-out forwards;
+}
+
+@keyframes fadeInBottom {
+  to {
+    opacity: var(--element-opacity);
+    transform: translateX(var(--scroll-offset-x2));
+  }
+}
+
+/* Content1 */
+#content1 {
+    opacity: var(--content1-opacity);
+    transform: var(--content1-transform);
+}
+
+@font-face {
+  font-family: "hs";
+  src: url("hs.woff2") format('woff2');
+}
+
+.font-anton {
+    font-family: 'hs', sans-serif;
+
+}
+
+/* Contact */
+#contact {
+    opacity: var(--contactus-opacity);
+    transform: var(--contactus-transform);
+}
